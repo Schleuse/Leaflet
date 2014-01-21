@@ -74,35 +74,31 @@ L.extend(L.GeoJSON, {
 		    coords = geometry.coordinates,
 		    layers = [],
 		    coordsToLatLng = options.coordsToLatLng || this.coordsToLatLng,
+		    fn = options.geometryToLayer || options.pointToLayer || null,
 		    latlng, latlngs, i, len;
 
 		switch (geometry.type) {
 		case 'Point':
 			latlng = coordsToLatLng(coords);
-
-			return options.pointToLayer ?
-					options.pointToLayer(geojson, latlng) :
-					new L.Marker(latlng);
+			return fn !== null ? fn(geojson, latlng) : new L.Marker(latlng);
 
 		case 'MultiPoint':
 			for (i = 0, len = coords.length; i < len; i++) {
 				latlng = coordsToLatLng(coords[i]);
 
-				layers.push(options.pointToLayer ?
-						options.pointToLayer(geojson, latlng) :
-						new L.Marker(latlng));
+				layers.push(fn !== null ? fn(geojson, latlng) : new L.Marker(latlng));
 			}
 			return new L.FeatureGroup(layers);
 
 		case 'LineString':
 		case 'MultiLineString':
 			latlngs = this.coordsToLatLngs(coords, geometry.type === 'LineString' ? 0 : 1, coordsToLatLng);
-			return new L.Polyline(latlngs, options);
+			return fn !== null ? fn(geojson, latlngs) : new L.Polyline(latlngs, options);
 
 		case 'Polygon':
 		case 'MultiPolygon':
 			latlngs = this.coordsToLatLngs(coords, geometry.type === 'Polygon' ? 1 : 2, coordsToLatLng);
-			return new L.Polygon(latlngs, options);
+			return fn !== null ? fn(geojson, latlngs) : new L.Polygon(latlngs, options);
 
 		case 'GeometryCollection':
 			for (i = 0, len = geometry.geometries.length; i < len; i++) {
