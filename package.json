@@ -1,5 +1,5 @@
 {
-  "name": "leaflet",
+  "name": "@sitepark/leaflet",
   "version": "1.4.0",
   "description": "JavaScript library for mobile-friendly interactive maps",
   "devDependencies": {
@@ -37,6 +37,9 @@
     "src",
     "!dist/leaflet.zip"
   ],
+  "publishConfig": {
+    "registry": "http://develop.sitepark.com/nexus/repository/npm-forks/"
+  },
   "scripts": {
     "docs": "node ./build/docs.js",
     "pretest": "npm run lint && npm run lint-spec",
