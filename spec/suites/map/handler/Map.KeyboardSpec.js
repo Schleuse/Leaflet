@@ -37,9 +37,9 @@ describe("Map.Keyboard", function () {
 	describe("arrow keys", function () {
 		it("move the map north", function (done) {
 
-			happen.keydown(document,  {keyCode: KEYCODE_ARROW_UP});
-			happen.keypress(document, {keyCode: KEYCODE_ARROW_UP});
-			happen.keyup(document,    {keyCode: KEYCODE_ARROW_UP});
+			happen.keydown(container,  {keyCode: KEYCODE_ARROW_UP});
+			happen.keypress(container, {keyCode: KEYCODE_ARROW_UP});
+			happen.keyup(container,    {keyCode: KEYCODE_ARROW_UP});
 
 			setTimeout(function () {
 				expect(map.getCenter().lat).to.be.greaterThan(0);
@@ -49,9 +49,9 @@ describe("Map.Keyboard", function () {
 
 		it("move the map south", function (done) {
 
-			happen.keydown(document,  {keyCode: KEYCODE_ARROW_DOWN});
-			happen.keypress(document, {keyCode: KEYCODE_ARROW_DOWN});
-			happen.keyup(document,    {keyCode: KEYCODE_ARROW_DOWN});
+			happen.keydown(container,  {keyCode: KEYCODE_ARROW_DOWN});
+			happen.keypress(container, {keyCode: KEYCODE_ARROW_DOWN});
+			happen.keyup(container,    {keyCode: KEYCODE_ARROW_DOWN});
 
 			setTimeout(function () {
 				expect(map.getCenter().lat).to.be.lessThan(0);
@@ -61,9 +61,9 @@ describe("Map.Keyboard", function () {
 
 		it("move the map west", function (done) {
 
-			happen.keydown(document,  {keyCode: KEYCODE_ARROW_LEFT});
-			happen.keypress(document, {keyCode: KEYCODE_ARROW_LEFT});
-			happen.keyup(document,    {keyCode: KEYCODE_ARROW_LEFT});
+			happen.keydown(container,  {keyCode: KEYCODE_ARROW_LEFT});
+			happen.keypress(container, {keyCode: KEYCODE_ARROW_LEFT});
+			happen.keyup(container,    {keyCode: KEYCODE_ARROW_LEFT});
 
 			setTimeout(function () {
 				expect(map.getCenter().lng).to.be.lessThan(0);
@@ -73,9 +73,9 @@ describe("Map.Keyboard", function () {
 
 		it("move the map east", function (done) {
 
-			happen.keydown(document,  {keyCode: KEYCODE_ARROW_RIGHT});
-			happen.keypress(document, {keyCode: KEYCODE_ARROW_RIGHT});
-			happen.keyup(document,    {keyCode: KEYCODE_ARROW_RIGHT});
+			happen.keydown(container,  {keyCode: KEYCODE_ARROW_RIGHT});
+			happen.keypress(container, {keyCode: KEYCODE_ARROW_RIGHT});
+			happen.keyup(container,    {keyCode: KEYCODE_ARROW_RIGHT});
 
 			setTimeout(function () {
 				expect(map.getCenter().lng).to.be.greaterThan(0);
@@ -87,9 +87,9 @@ describe("Map.Keyboard", function () {
 	describe("plus/minus keys", function () {
 		it("zoom in", function (done) {
 
-			happen.keydown(document,  {keyCode: KEYCODE_PLUS});
-			happen.keypress(document, {keyCode: KEYCODE_PLUS});
-			happen.keyup(document,    {keyCode: KEYCODE_PLUS});
+			happen.keydown(container,  {keyCode: KEYCODE_PLUS});
+			happen.keypress(container, {keyCode: KEYCODE_PLUS});
+			happen.keyup(container,    {keyCode: KEYCODE_PLUS});
 
 			setTimeout(function () {
 				expect(map.getZoom()).to.be.greaterThan(5);
@@ -99,9 +99,9 @@ describe("Map.Keyboard", function () {
 
 		it("zoom out", function (done) {
 
-			happen.keydown(document,  {keyCode: KEYCODE_MINUS});
-			happen.keypress(document, {keyCode: KEYCODE_MINUS});
-			happen.keyup(document,    {keyCode: KEYCODE_MINUS});
+			happen.keydown(container,  {keyCode: KEYCODE_MINUS});
+			happen.keypress(container, {keyCode: KEYCODE_MINUS});
+			happen.keyup(container,    {keyCode: KEYCODE_MINUS});
 
 			setTimeout(function () {
 				expect(map.getZoom()).to.be.lessThan(5);
@@ -115,9 +115,9 @@ describe("Map.Keyboard", function () {
 
 			map.keyboard.disable();
 
-			happen.keydown(document,  {keyCode: KEYCODE_PLUS});
-			happen.keypress(document, {keyCode: KEYCODE_PLUS});
-			happen.keyup(document,    {keyCode: KEYCODE_PLUS});
+			happen.keydown(container,  {keyCode: KEYCODE_PLUS});
+			happen.keypress(container, {keyCode: KEYCODE_PLUS});
+			happen.keyup(container,    {keyCode: KEYCODE_PLUS});
 
 			setTimeout(function () {
 				expect(map.getZoom()).to.eql(5);
@@ -129,9 +129,9 @@ describe("Map.Keyboard", function () {
 
 			map.keyboard.disable();
 
-			happen.keydown(document,  {keyCode: KEYCODE_ARROW_UP});
-			happen.keypress(document, {keyCode: KEYCODE_ARROW_UP});
-			happen.keyup(document,    {keyCode: KEYCODE_ARROW_UP});
+			happen.keydown(container,  {keyCode: KEYCODE_ARROW_UP});
+			happen.keypress(container, {keyCode: KEYCODE_ARROW_UP});
+			happen.keyup(container,    {keyCode: KEYCODE_ARROW_UP});
 
 			setTimeout(function () {
 				expect(map.getCenter().lat).to.eql(0);
@@ -149,8 +149,8 @@ describe("Map.Keyboard", function () {
 
 			expect(popup.isOpen()).to.be(true);
 
-			happen.keydown(document,  {keyCode: KEYCODE_ESC});
-			happen.keyup(document,    {keyCode: KEYCODE_ESC});
+			happen.keydown(container,  {keyCode: KEYCODE_ESC});
+			happen.keyup(container,    {keyCode: KEYCODE_ESC});
 
 			expect(popup.isOpen()).to.be(false);
 		});
@@ -164,8 +164,8 @@ describe("Map.Keyboard", function () {
 
 			expect(popup.isOpen()).to.be(true);
 
-			happen.keydown(document,  {keyCode: KEYCODE_ESC});
-			happen.keyup(document,    {keyCode: KEYCODE_ESC});
+			happen.keydown(container,  {keyCode: KEYCODE_ESC});
+			happen.keyup(container,    {keyCode: KEYCODE_ESC});
 
 			expect(popup.isOpen()).to.be(true);
 		});

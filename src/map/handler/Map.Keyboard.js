@@ -53,25 +53,19 @@ export var Keyboard = Handler.extend({
 			mousedown: this._onMouseDown
 		}, this);
 
-		this._map.on({
-			focus: this._addHooks,
-			blur: this._removeHooks
-		}, this);
+		on(container, 'keydown', this._onKeyDown, this);
 	},
 
 	removeHooks: function () {
-		this._removeHooks();
+		var container = this._map._container;
 
-		off(this._map._container, {
+		off(container, {
 			focus: this._onFocus,
 			blur: this._onBlur,
 			mousedown: this._onMouseDown
 		}, this);
 
-		this._map.off({
-			focus: this._addHooks,
-			blur: this._removeHooks
-		}, this);
+		off(container, 'keydown', this._onKeyDown, this);
 	},
 
 	_onMouseDown: function () {
@@ -127,14 +121,6 @@ export var Keyboard = Handler.extend({
 		for (i = 0, len = codes.zoomOut.length; i < len; i++) {
 			keys[codes.zoomOut[i]] = -zoomDelta;
 		}
-	},
-
-	_addHooks: function () {
-		on(document, 'keydown', this._onKeyDown, this);
-	},
-
-	_removeHooks: function () {
-		off(document, 'keydown', this._onKeyDown, this);
 	},
 
 	_onKeyDown: function (e) {
