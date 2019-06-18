@@ -29,7 +29,7 @@ echo "Uploading to NPM..."
 
 npm publish
 
-git checkout master
+git checkout fork-deploy
 git branch -D build
 
 echo "All done."
