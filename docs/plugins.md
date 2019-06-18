@@ -623,6 +623,15 @@ The following plugins change the way that tile or image layers are displayed in 
 			<a href="https://github.com/valkenburg">Wessel Valkenburg</a>
 		</td>
 	</tr>
+	<tr>
+		<td>
+			<a href="https://github.com/publiclab/leaflet-multispectral">Leaflet.Multispectral</a>
+		</td><td>
+			Provides multispectral channel manipulation and processing tools (such as NDVI or other remote sensing methods) for Leaflet image layers using pure client-side JavaScript. It uses `image-sequencer` via an ImageOverlay `filter()` function. (<a href='https://publiclab.github.io/leaflet-multispectral/'>demo</a>).
+		</td><td>
+			<a href="https://publiclab.org">Public Lab</a>
+		</td>
+	</tr>
 </table>
 
 
@@ -2379,6 +2388,17 @@ Most data is two-dimensional (latitude and longitude), but some data has more di
 <table class="plugins"><tr><th>Plugin</th><th>Description</th><th>Maintainer</th></tr>
 	<tr>
 		<td>
+			<a href="https://github.com/svitkin/leaflet-timeline-slider/">Leaflet.timelineSlider</a>
+		</td>
+		<td>
+			Leaflet plugin that creates a customizable timeline slider with user designed functionality. Original implementation of timeline at https://codepen.io/trevanhetzel/pen/rOVrGK.
+		</td>
+		<td>
+			<a href="https://github.com/svitkin">Sol Vitkin</a>
+		</td>
+	</tr>
+	<tr>
+		<td>
 			<a href="https://github.com/socib/Leaflet.TimeDimension">Leaflet.TimeDimension</a>
 		</td>
 		<td>
@@ -3741,7 +3761,7 @@ Buttons, sliders, toolbars, sidebars, and panels.
 	</tr>
 	<tr>
 		<td>
-			<a href="https://github.com/publiclab/leaflet-blurred-location/">leaflet-blurred-image</a>
+			<a href="https://github.com/publiclab/leaflet-blurred-location/">leaflet-blurred-location</a>
 		</td>
 		<td>
 			A Leaflet-based interface for selecting a "blurred" or low-resolution location, to preserve privacy. <a href="https://publiclab.github.io/leaflet-blurred-location/examples/">Demo</a>.
