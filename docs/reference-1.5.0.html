@@ -6,7 +6,7 @@ bodyclass: api-page
 
 <h2>Leaflet API reference</h2>
 
-<p>This reference reflects <strong>Leaflet 1.4.0</strong>. Check <a href='reference-versions.html'>this list</a> if you are using a different version of Leaflet.</p>
+<p>This reference reflects <strong>Leaflet 1.5.0</strong> and <strong>Leaflet 1.5.1</strong>. Check <a href='reference-versions.html'>this list</a> if you are using a different version of Leaflet.</p>
 
 	<div id="toc" class="clearfix">
 		<div class="toc-col map-col">
@@ -53,6 +53,7 @@ bodyclass: api-page
 				<li><a href="#rectangle">Rectangle</a></li>
 				<li><a href="#circle">Circle</a></li>
 				<li><a href="#circlemarker">CircleMarker</a></li>
+				<li><a href="#svgoverlay">SVGOverlay</a></li>
 				<li><a href="#svg">SVG</a></li>
 				<li><a href="#canvas">Canvas</a></li>
 			</ul>
@@ -253,28 +254,6 @@ By default, all <code>Path</code>s are rendered in a <a href="#svg"><code>SVG</c
 		<td><code>true</code></td>
 		<td>Set it to <code>false</code> if you don&#39;t want popups to close when user clicks the map.</td>
 	</tr>
-	<tr id='map-boxzoom'>
-		<td><code><b>boxZoom</b></code></td>
-		<td><code>Boolean</code>
-		<td><code>true</code></td>
-		<td>Whether the map can be zoomed to a rectangular area specified by
-dragging the mouse while pressing the shift key.</td>
-	</tr>
-	<tr id='map-doubleclickzoom'>
-		<td><code><b>doubleClickZoom</b></code></td>
-		<td><code>Boolean|String</code>
-		<td><code>true</code></td>
-		<td>Whether the map can be zoomed in by double clicking on it and
-zoomed out by double clicking while holding shift. If passed
-<code>&#39;center&#39;</code>, double-click zoom will zoom to the center of the
- view regardless of where the mouse was.</td>
-	</tr>
-	<tr id='map-dragging'>
-		<td><code><b>dragging</b></code></td>
-		<td><code>Boolean</code>
-		<td><code>true</code></td>
-		<td>Whether the map be draggable with mouse/touch or not.</td>
-	</tr>
 	<tr id='map-zoomsnap'>
 		<td><code><b>zoomSnap</b></code></td>
 		<td><code>Number</code>
@@ -299,6 +278,151 @@ Values smaller than <code>1</code> (e.g. <code>0.5</code>) allow for greater gra
 		<td><code>Boolean</code>
 		<td><code>true</code></td>
 		<td>Whether the map automatically handles browser window resize to update itself.</td>
+	</tr>
+	<tr id='map-boxzoom'>
+		<td><code><b>boxZoom</b></code></td>
+		<td><code>Boolean</code>
+		<td><code>true</code></td>
+		<td>Whether the map can be zoomed to a rectangular area specified by
+dragging the mouse while pressing the shift key.</td>
+	</tr>
+	<tr id='map-doubleclickzoom'>
+		<td><code><b>doubleClickZoom</b></code></td>
+		<td><code>Boolean|String</code>
+		<td><code>true</code></td>
+		<td>Whether the map can be zoomed in by double clicking on it and
+zoomed out by double clicking while holding shift. If passed
+<code>&#39;center&#39;</code>, double-click zoom will zoom to the center of the
+ view regardless of where the mouse was.</td>
+	</tr>
+	<tr id='map-dragging'>
+		<td><code><b>dragging</b></code></td>
+		<td><code>Boolean</code>
+		<td><code>true</code></td>
+		<td>Whether the map be draggable with mouse/touch or not.</td>
+	</tr>
+</tbody></table>
+
+</section><section class='collapsable'>
+
+<h4 id='map-map-state-options'>Map State Options</h4>
+
+
+<table><thead>
+	<tr>
+		<th>Option</th>
+		<th>Type</th>
+		<th>Default</th>
+		<th>Description</th>
+	</tr>
+	</thead><tbody>
+	<tr id='map-crs'>
+		<td><code><b>crs</b></code></td>
+		<td><code><a href='#crs'>CRS</a></code>
+		<td><code>L.CRS.EPSG3857</code></td>
+		<td>The <a href="#crs">Coordinate Reference System</a> to use. Don&#39;t change this if you&#39;re not
+sure what it means.</td>
+	</tr>
+	<tr id='map-center'>
+		<td><code><b>center</b></code></td>
+		<td><code><a href='#latlng'>LatLng</a></code>
+		<td><code>undefined</code></td>
+		<td>Initial geographic center of the map</td>
+	</tr>
+	<tr id='map-zoom'>
+		<td><code><b>zoom</b></code></td>
+		<td><code>Number</code>
+		<td><code>undefined</code></td>
+		<td>Initial map zoom level</td>
+	</tr>
+	<tr id='map-minzoom'>
+		<td><code><b>minZoom</b></code></td>
+		<td><code>Number</code>
+		<td><code>*</code></td>
+		<td>Minimum zoom level of the map.
+If not specified and at least one <a href="#gridlayer"><code>GridLayer</code></a> or <a href="#tilelayer"><code>TileLayer</code></a> is in the map,
+the lowest of their <code>minZoom</code> options will be used instead.</td>
+	</tr>
+	<tr id='map-maxzoom'>
+		<td><code><b>maxZoom</b></code></td>
+		<td><code>Number</code>
+		<td><code>*</code></td>
+		<td>Maximum zoom level of the map.
+If not specified and at least one <a href="#gridlayer"><code>GridLayer</code></a> or <a href="#tilelayer"><code>TileLayer</code></a> is in the map,
+the highest of their <code>maxZoom</code> options will be used instead.</td>
+	</tr>
+	<tr id='map-layers'>
+		<td><code><b>layers</b></code></td>
+		<td><code>Layer[]</code>
+		<td><code>[]</code></td>
+		<td>Array of layers that will be added to the map initially</td>
+	</tr>
+	<tr id='map-maxbounds'>
+		<td><code><b>maxBounds</b></code></td>
+		<td><code><a href='#latlngbounds'>LatLngBounds</a></code>
+		<td><code>null</code></td>
+		<td>When this option is set, the map restricts the view to the given
+geographical bounds, bouncing the user back if the user tries to pan
+outside the view. To set the restriction dynamically, use
+<a href="#map-setmaxbounds"><code>setMaxBounds</code></a> method.</td>
+	</tr>
+	<tr id='map-renderer'>
+		<td><code><b>renderer</b></code></td>
+		<td><code><a href='#renderer'>Renderer</a></code>
+		<td><code>*</code></td>
+		<td>The default method for drawing vector layers on the map. <a href="#svg"><code>L.SVG</code></a>
+or <a href="#canvas"><code>L.Canvas</code></a> by default depending on browser support.</td>
+	</tr>
+</tbody></table>
+
+</section><section class='collapsable'>
+
+<h4 id='map-animation-options'>Animation Options</h4>
+
+
+<table><thead>
+	<tr>
+		<th>Option</th>
+		<th>Type</th>
+		<th>Default</th>
+		<th>Description</th>
+	</tr>
+	</thead><tbody>
+	<tr id='map-zoomanimation'>
+		<td><code><b>zoomAnimation</b></code></td>
+		<td><code>Boolean</code>
+		<td><code>true</code></td>
+		<td>Whether the map zoom animation is enabled. By default it&#39;s enabled
+in all browsers that support CSS3 Transitions except Android.</td>
+	</tr>
+	<tr id='map-zoomanimationthreshold'>
+		<td><code><b>zoomAnimationThreshold</b></code></td>
+		<td><code>Number</code>
+		<td><code>4</code></td>
+		<td>Won&#39;t animate zoom if the zoom difference exceeds this value.</td>
+	</tr>
+	<tr id='map-fadeanimation'>
+		<td><code><b>fadeAnimation</b></code></td>
+		<td><code>Boolean</code>
+		<td><code>true</code></td>
+		<td>Whether the tile fade animation is enabled. By default it&#39;s enabled
+in all browsers that support CSS3 Transitions except Android.</td>
+	</tr>
+	<tr id='map-markerzoomanimation'>
+		<td><code><b>markerZoomAnimation</b></code></td>
+		<td><code>Boolean</code>
+		<td><code>true</code></td>
+		<td>Whether markers animate their zoom with the zoom animation, if disabled
+they will disappear for the length of the animation. By default it&#39;s
+enabled in all browsers that support CSS3 Transitions except Android.</td>
+	</tr>
+	<tr id='map-transform3dlimit'>
+		<td><code><b>transform3DLimit</b></code></td>
+		<td><code>Number</code>
+		<td><code>2^23</code></td>
+		<td>Defines the maximum size of a CSS translation transform. The default
+value should not be changed unless a web browser positions layers in
+the wrong place after doing a large <code>panBy</code>.</td>
 	</tr>
 </tbody></table>
 
@@ -469,129 +593,6 @@ browsers except for old Androids.</td>
 		<td><code>true</code></td>
 		<td>Set it to false if you don&#39;t want the map to zoom beyond min/max zoom
 and then bounce back when pinch-zooming.</td>
-	</tr>
-</tbody></table>
-
-</section><section class='collapsable'>
-
-<h4 id='map-map-state-options'>Map State Options</h4>
-
-
-<table><thead>
-	<tr>
-		<th>Option</th>
-		<th>Type</th>
-		<th>Default</th>
-		<th>Description</th>
-	</tr>
-	</thead><tbody>
-	<tr id='map-crs'>
-		<td><code><b>crs</b></code></td>
-		<td><code><a href='#crs'>CRS</a></code>
-		<td><code>L.CRS.EPSG3857</code></td>
-		<td>The <a href="#crs">Coordinate Reference System</a> to use. Don&#39;t change this if you&#39;re not
-sure what it means.</td>
-	</tr>
-	<tr id='map-center'>
-		<td><code><b>center</b></code></td>
-		<td><code><a href='#latlng'>LatLng</a></code>
-		<td><code>undefined</code></td>
-		<td>Initial geographic center of the map</td>
-	</tr>
-	<tr id='map-zoom'>
-		<td><code><b>zoom</b></code></td>
-		<td><code>Number</code>
-		<td><code>undefined</code></td>
-		<td>Initial map zoom level</td>
-	</tr>
-	<tr id='map-minzoom'>
-		<td><code><b>minZoom</b></code></td>
-		<td><code>Number</code>
-		<td><code>*</code></td>
-		<td>Minimum zoom level of the map.
-If not specified and at least one <a href="#gridlayer"><code>GridLayer</code></a> or <a href="#tilelayer"><code>TileLayer</code></a> is in the map,
-the lowest of their <code>minZoom</code> options will be used instead.</td>
-	</tr>
-	<tr id='map-maxzoom'>
-		<td><code><b>maxZoom</b></code></td>
-		<td><code>Number</code>
-		<td><code>*</code></td>
-		<td>Maximum zoom level of the map.
-If not specified and at least one <a href="#gridlayer"><code>GridLayer</code></a> or <a href="#tilelayer"><code>TileLayer</code></a> is in the map,
-the highest of their <code>maxZoom</code> options will be used instead.</td>
-	</tr>
-	<tr id='map-layers'>
-		<td><code><b>layers</b></code></td>
-		<td><code>Layer[]</code>
-		<td><code>[]</code></td>
-		<td>Array of layers that will be added to the map initially</td>
-	</tr>
-	<tr id='map-maxbounds'>
-		<td><code><b>maxBounds</b></code></td>
-		<td><code><a href='#latlngbounds'>LatLngBounds</a></code>
-		<td><code>null</code></td>
-		<td>When this option is set, the map restricts the view to the given
-geographical bounds, bouncing the user back if the user tries to pan
-outside the view. To set the restriction dynamically, use
-<a href="#map-setmaxbounds"><code>setMaxBounds</code></a> method.</td>
-	</tr>
-	<tr id='map-renderer'>
-		<td><code><b>renderer</b></code></td>
-		<td><code><a href='#renderer'>Renderer</a></code>
-		<td><code>*</code></td>
-		<td>The default method for drawing vector layers on the map. <a href="#svg"><code>L.SVG</code></a>
-or <a href="#canvas"><code>L.Canvas</code></a> by default depending on browser support.</td>
-	</tr>
-</tbody></table>
-
-</section><section class='collapsable'>
-
-<h4 id='map-animation-options'>Animation Options</h4>
-
-
-<table><thead>
-	<tr>
-		<th>Option</th>
-		<th>Type</th>
-		<th>Default</th>
-		<th>Description</th>
-	</tr>
-	</thead><tbody>
-	<tr id='map-zoomanimation'>
-		<td><code><b>zoomAnimation</b></code></td>
-		<td><code>Boolean</code>
-		<td><code>true</code></td>
-		<td>Whether the map zoom animation is enabled. By default it&#39;s enabled
-in all browsers that support CSS3 Transitions except Android.</td>
-	</tr>
-	<tr id='map-zoomanimationthreshold'>
-		<td><code><b>zoomAnimationThreshold</b></code></td>
-		<td><code>Number</code>
-		<td><code>4</code></td>
-		<td>Won&#39;t animate zoom if the zoom difference exceeds this value.</td>
-	</tr>
-	<tr id='map-fadeanimation'>
-		<td><code><b>fadeAnimation</b></code></td>
-		<td><code>Boolean</code>
-		<td><code>true</code></td>
-		<td>Whether the tile fade animation is enabled. By default it&#39;s enabled
-in all browsers that support CSS3 Transitions except Android.</td>
-	</tr>
-	<tr id='map-markerzoomanimation'>
-		<td><code><b>markerZoomAnimation</b></code></td>
-		<td><code>Boolean</code>
-		<td><code>true</code></td>
-		<td>Whether markers animate their zoom with the zoom animation, if disabled
-they will disappear for the length of the animation. By default it&#39;s
-enabled in all browsers that support CSS3 Transitions except Android.</td>
-	</tr>
-	<tr id='map-transform3dlimit'>
-		<td><code><b>transform3DLimit</b></code></td>
-		<td><code>Number</code>
-		<td><code>2^23</code></td>
-		<td>Defines the maximum size of a CSS translation transform. The default
-value should not be changed unless a web browser positions layers in
-the wrong place after doing a large <code>panBy</code>.</td>
 	</tr>
 </tbody></table>
 
@@ -852,7 +853,19 @@ for a second (also called long press).</td>
 	<tr id='map-keypress'>
 		<td><code><b>keypress</b>
 		<td><code><a href='#keyboardevent'>KeyboardEvent</a></code></td>
-		<td>Fired when the user presses a key from the keyboard while the map is focused.</td>
+		<td>Fired when the user presses a key from the keyboard that produces a character value while the map is focused.</td>
+	</tr>
+	<tr id='map-keydown'>
+		<td><code><b>keydown</b>
+		<td><code><a href='#keyboardevent'>KeyboardEvent</a></code></td>
+		<td>Fired when the user presses a key from the keyboard while the map is focused. Unlike the <code>keypress</code> event,
+the <code>keydown</code> event is fired for keys that produce a character value and for keys
+that do not produce a character value.</td>
+	</tr>
+	<tr id='map-keyup'>
+		<td><code><b>keyup</b>
+		<td><code><a href='#keyboardevent'>KeyboardEvent</a></code></td>
+		<td>Fired when the user releases a key from the keyboard while the map is focused.</td>
 	</tr>
 	<tr id='map-preclick'>
 		<td><code><b>preclick</b>
@@ -1505,7 +1518,7 @@ event took place.</p>
 	<tr id='map-off'>
 		<td><code><b>off</b>()</nobr></code></td>
 		<td><code>this</code></td>
-		<td><p>Removes all listeners to all events on the object.</p>
+		<td><p>Removes all listeners to all events on the object. This includes implicitly attached events.</p>
 </td>
 	</tr>
 	<tr id='map-fire'>
@@ -2200,7 +2213,8 @@ If not specified, a common instance of <a href="#icon-default"><code>L.Icon.Defa
 		<td><code><b>pane</b></code></td>
 		<td><code>String</code>
 		<td><code>&#x27;markerPane&#x27;</code></td>
-		<td><code>Map pane</code> where the markers icon will be added.</td>
+		<td><code>Map pane</code> where the markers icon will be added.
+<code>Map pane</code> where the markers shadow will be added.</td>
 	</tr>
 	<tr id='marker-bubblingmouseevents'>
 		<td><code><b>bubblingMouseEvents</b></code></td>
@@ -2543,9 +2557,11 @@ for a second (also called long press).</td>
 	</tr>
 	</thead><tbody>
 	<tr id='marker-togeojson'>
-		<td><code><b>toGeoJSON</b>(<nobr>&lt;Number&gt;</nobr> <i>precision</i>)</nobr></code></td>
+		<td><code><b>toGeoJSON</b>(<nobr>&lt;Number&gt;</nobr> <i>precision?</i>)</nobr></code></td>
 		<td><code>Object</code></td>
-		<td><p>Returns a <a href="http://en.wikipedia.org/wiki/GeoJSON"><a href="#geojson"><code>GeoJSON</code></a></a> representation of the marker (as a GeoJSON <a href="#point"><code>Point</code></a> Feature).</p>
+		<td><p><code>precision</code> is the number of decimal places for coordinates.
+The default value is 6 places.
+Returns a <a href="http://en.wikipedia.org/wiki/GeoJSON"><a href="#geojson"><code>GeoJSON</code></a></a> representation of the marker (as a GeoJSON <a href="#point"><code>Point</code></a> Feature).</p>
 </td>
 	</tr>
 	<tr id='marker-getlatlng'>
@@ -2564,6 +2580,12 @@ for a second (also called long press).</td>
 		<td><code><b>setZIndexOffset</b>(<nobr>&lt;Number&gt;</nobr> <i>offset</i>)</nobr></code></td>
 		<td><code>this</code></td>
 		<td><p>Changes the <a href="#marker-zindexoffset">zIndex offset</a> of the marker.</p>
+</td>
+	</tr>
+	<tr id='marker-geticon'>
+		<td><code><b>getIcon</b>()</nobr></code></td>
+		<td><code><a href='#icon'>Icon</a></code></td>
+		<td><p>Returns the current icon used by the marker</p>
 </td>
 	</tr>
 	<tr id='marker-seticon'>
@@ -2818,7 +2840,7 @@ the layer as the first argument and should return a <code>String</code> or <code
 	<tr id='marker-off'>
 		<td><code><b>off</b>()</nobr></code></td>
 		<td><code>this</code></td>
-		<td><p>Removes all listeners to all events on the object.</p>
+		<td><p>Removes all listeners to all events on the object. This includes implicitly attached events.</p>
 </td>
 	</tr>
 	<tr id='marker-fire'>
@@ -3559,7 +3581,7 @@ the layer as the first argument and should return a <code>String</code> or <code
 	<tr id='popup-off'>
 		<td><code><b>off</b>()</nobr></code></td>
 		<td><code>this</code></td>
-		<td><p>Removes all listeners to all events on the object.</p>
+		<td><p>Removes all listeners to all events on the object. This includes implicitly attached events.</p>
 </td>
 	</tr>
 	<tr id='popup-fire'>
@@ -4149,7 +4171,7 @@ the layer as the first argument and should return a <code>String</code> or <code
 	<tr id='tooltip-off'>
 		<td><code><b>off</b>()</nobr></code></td>
 		<td><code>this</code></td>
-		<td><p>Removes all listeners to all events on the object.</p>
+		<td><p>Removes all listeners to all events on the object. This includes implicitly attached events.</p>
 </td>
 	</tr>
 	<tr id='tooltip-fire'>
@@ -5010,7 +5032,7 @@ the layer as the first argument and should return a <code>String</code> or <code
 	<tr id='tilelayer-off'>
 		<td><code><b>off</b>()</nobr></code></td>
 		<td><code>this</code></td>
-		<td><p>Removes all listeners to all events on the object.</p>
+		<td><p>Removes all listeners to all events on the object. This includes implicitly attached events.</p>
 </td>
 	</tr>
 	<tr id='tilelayer-fire'>
@@ -5935,7 +5957,7 @@ the layer as the first argument and should return a <code>String</code> or <code
 	<tr id='tilelayer-wms-off'>
 		<td><code><b>off</b>()</nobr></code></td>
 		<td><code>this</code></td>
-		<td><p>Removes all listeners to all events on the object.</p>
+		<td><p>Removes all listeners to all events on the object. This includes implicitly attached events.</p>
 </td>
 	</tr>
 	<tr id='tilelayer-wms-fire'>
@@ -6671,7 +6693,7 @@ the layer as the first argument and should return a <code>String</code> or <code
 	<tr id='imageoverlay-off'>
 		<td><code><b>off</b>()</nobr></code></td>
 		<td><code>this</code></td>
-		<td><p>Removes all listeners to all events on the object.</p>
+		<td><p>Removes all listeners to all events on the object. This includes implicitly attached events.</p>
 </td>
 	</tr>
 	<tr id='imageoverlay-fire'>
@@ -6822,6 +6844,13 @@ geographical bounds it is tied to.</td>
 		<td><code>Boolean</code>
 		<td><code>true</code></td>
 		<td>Whether the video will loop back to the beginning when played.</td>
+	</tr>
+	<tr id='videooverlay-keepaspectratio'>
+		<td><code><b>keepAspectRatio</b></code></td>
+		<td><code>Boolean</code>
+		<td><code>true</code></td>
+		<td>Whether the video will save aspect ratio after the projection.
+Relevant for supported browsers. Browser compatibility- <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit">https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit</a></td>
 	</tr>
 </tbody></table>
 
@@ -7485,7 +7514,7 @@ the layer as the first argument and should return a <code>String</code> or <code
 	<tr id='videooverlay-off'>
 		<td><code><b>off</b>()</nobr></code></td>
 		<td><code>this</code></td>
-		<td><p>Removes all listeners to all events on the object.</p>
+		<td><p>Removes all listeners to all events on the object. This includes implicitly attached events.</p>
 </td>
 	</tr>
 	<tr id='videooverlay-fire'>
@@ -7551,6 +7580,781 @@ properties. The event can optionally be propagated to event parents.</p>
 </td>
 	</tr>
 	<tr id='videooverlay-haseventlisteners'>
+		<td><code><b>hasEventListeners</b>(<i>…</i>)</nobr></code></td>
+		<td><code>Boolean</code></td>
+		<td><p>Alias to <a href="#evented-listens"><code>listens(…)</code></a></p>
+</td>
+	</tr>
+</tbody></table>
+
+</section></div>
+	</div>
+</div>
+
+</section><h2 id='svgoverlay'>SVGOverlay</h2><p>Used to load, display and provide DOM access to an SVG file over specific bounds of the map. Extends <a href="#imageoverlay"><code>ImageOverlay</code></a>.
+An SVG overlay uses the <a href="https://developer.mozilla.org/docs/Web/SVG/Element/svg"><code>&lt;svg&gt;</code></a> element.</p>
+
+<section>
+<h3 id='svgoverlay-example'>Usage example</h3>
+
+<section >
+
+
+
+
+
+<pre><code class="lang-js">var svgElement = document.createElementNS(&quot;http://www.w3.org/2000/svg&quot;, &quot;svg&quot;);
+svgElement.setAttribute(&#39;xmlns&#39;, &quot;http://www.w3.org/2000/svg&quot;);
+svgElement.setAttribute(&#39;viewBox&#39;, &quot;0 0 200 200&quot;);
+svgElement.innerHTML = &#39;&lt;rect width=&quot;200&quot; height=&quot;200&quot;/&gt;&lt;rect x=&quot;75&quot; y=&quot;23&quot; width=&quot;50&quot; height=&quot;50&quot; style=&quot;fill:red&quot;/&gt;&lt;rect x=&quot;75&quot; y=&quot;123&quot; width=&quot;50&quot; height=&quot;50&quot; style=&quot;fill:#0013ff&quot;/&gt;&#39;;
+var svgElementBounds = [ [ 32, -130 ], [ 13, -100 ] ];
+L.svgOverlay(svgElement, svgElementBounds).addTo(map);
+</code></pre>
+
+
+
+</section>
+
+
+</section><section>
+<h3 id='svgoverlay-factory'>Creation</h3>
+
+<section >
+
+
+
+
+<table><thead>
+	<tr>
+		<th>Factory</th>
+		<th>Description</th>
+	</tr>
+	</thead><tbody>
+	<tr id='svgoverlay-l-svgoverlay'>
+		<td><code><b>L.svgOverlay</b>(<nobr>&lt;String|SVGElement&gt;</nobr> <i>svg</i>, <nobr>&lt;<a href='#latlngbounds'>LatLngBounds</a>&gt;</nobr> <i>bounds</i>, <nobr>&lt;SVGOverlay options&gt;</nobr> <i>options?</i>)</nobr></code></td>
+		<td>Instantiates an image overlay object given an SVG element and the geographical bounds it is tied to.
+A viewBox attribute is required on the SVG element to zoom in and out properly.</td>
+	</tr>
+</tbody></table>
+
+</section>
+
+
+</section><section>
+<h3 id=''>Options</h3>
+
+
+
+
+<div class='accordion'>
+	<label><span class='expander'>▶</span> Options inherited from <a href='#imageoverlay'>ImageOverlay</a></label>
+	<div class='accordion-overflow'>
+		<div class='accordion-content'><section >
+
+
+
+
+<table><thead>
+	<tr>
+		<th>Option</th>
+		<th>Type</th>
+		<th>Default</th>
+		<th>Description</th>
+	</tr>
+	</thead><tbody>
+	<tr id='svgoverlay-opacity'>
+		<td><code><b>opacity</b></code></td>
+		<td><code>Number</code>
+		<td><code>1.0</code></td>
+		<td>The opacity of the image overlay.</td>
+	</tr>
+	<tr id='svgoverlay-alt'>
+		<td><code><b>alt</b></code></td>
+		<td><code>String</code>
+		<td><code>&#x27;&#x27;</code></td>
+		<td>Text for the <code>alt</code> attribute of the image (useful for accessibility).</td>
+	</tr>
+	<tr id='svgoverlay-interactive'>
+		<td><code><b>interactive</b></code></td>
+		<td><code>Boolean</code>
+		<td><code>false</code></td>
+		<td>If <code>true</code>, the image overlay will emit <a href="#interactive-layer">mouse events</a> when clicked or hovered.</td>
+	</tr>
+	<tr id='svgoverlay-crossorigin'>
+		<td><code><b>crossOrigin</b></code></td>
+		<td><code>Boolean|String</code>
+		<td><code>false</code></td>
+		<td>Whether the crossOrigin attribute will be added to the image.
+If a String is provided, the image will have its crossOrigin attribute set to the String provided. This is needed if you want to access image pixel data.
+Refer to <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_settings_attributes">CORS Settings</a> for valid String values.</td>
+	</tr>
+	<tr id='svgoverlay-erroroverlayurl'>
+		<td><code><b>errorOverlayUrl</b></code></td>
+		<td><code>String</code>
+		<td><code>&#x27;&#x27;</code></td>
+		<td>URL to the overlay image to show in place of the overlay that failed to load.</td>
+	</tr>
+	<tr id='svgoverlay-zindex'>
+		<td><code><b>zIndex</b></code></td>
+		<td><code>Number</code>
+		<td><code>1</code></td>
+		<td>The explicit <a href="https://developer.mozilla.org/docs/Web/CSS/CSS_Positioning/Understanding_z_index">zIndex</a> of the overlay layer.</td>
+	</tr>
+	<tr id='svgoverlay-classname'>
+		<td><code><b>className</b></code></td>
+		<td><code>String</code>
+		<td><code>&#x27;&#x27;</code></td>
+		<td>A custom class name to assign to the image. Empty by default.</td>
+	</tr>
+</tbody></table>
+
+</section></div>
+	</div>
+</div>
+
+<div class='accordion'>
+	<label><span class='expander'>▶</span> Options inherited from <a href='#interactive-layer'>Interactive layer</a></label>
+	<div class='accordion-overflow'>
+		<div class='accordion-content'><section >
+
+
+
+
+<table><thead>
+	<tr>
+		<th>Option</th>
+		<th>Type</th>
+		<th>Default</th>
+		<th>Description</th>
+	</tr>
+	</thead><tbody>
+	<tr id='svgoverlay-bubblingmouseevents'>
+		<td><code><b>bubblingMouseEvents</b></code></td>
+		<td><code>Boolean</code>
+		<td><code>true</code></td>
+		<td>When <code>true</code>, a mouse event on this layer will trigger the same event on the map
+(unless <a href="#domevent-stoppropagation"><code>L.DomEvent.stopPropagation</code></a> is used).</td>
+	</tr>
+</tbody></table>
+
+</section></div>
+	</div>
+</div>
+
+<div class='accordion'>
+	<label><span class='expander'>▶</span> Options inherited from <a href='#layer'>Layer</a></label>
+	<div class='accordion-overflow'>
+		<div class='accordion-content'><section >
+
+
+
+
+<table><thead>
+	<tr>
+		<th>Option</th>
+		<th>Type</th>
+		<th>Default</th>
+		<th>Description</th>
+	</tr>
+	</thead><tbody>
+	<tr id='svgoverlay-pane'>
+		<td><code><b>pane</b></code></td>
+		<td><code>String</code>
+		<td><code>&#x27;overlayPane&#x27;</code></td>
+		<td>By default the layer will be added to the map&#39;s <a href="#map-overlaypane">overlay pane</a>. Overriding this option will cause the layer to be placed on another pane by default.</td>
+	</tr>
+	<tr id='svgoverlay-attribution'>
+		<td><code><b>attribution</b></code></td>
+		<td><code>String</code>
+		<td><code>null</code></td>
+		<td>String to be shown in the attribution control, e.g. &quot;© OpenStreetMap contributors&quot;. It describes the layer data and is often a legal obligation towards copyright holders and tile providers.</td>
+	</tr>
+</tbody></table>
+
+</section></div>
+	</div>
+</div>
+
+</section><section>
+<h3 id=''>Events</h3>
+
+
+
+
+<div class='accordion'>
+	<label><span class='expander'>▶</span> Events inherited from <a href='#imageoverlay'>ImageOverlay</a></label>
+	<div class='accordion-overflow'>
+		<div class='accordion-content'><section >
+
+
+
+
+<table><thead>
+	<tr>
+		<th>Event</th>
+		<th>Data</th>
+		<th>Description</th>
+	</tr>
+	</thead><tbody>
+	<tr id='svgoverlay-load'>
+		<td><code><b>load</b>
+		<td><code><a href='#event'>Event</a></code></td>
+		<td>Fired when the ImageOverlay layer has loaded its image</td>
+	</tr>
+	<tr id='svgoverlay-error'>
+		<td><code><b>error</b>
+		<td><code><a href='#event'>Event</a></code></td>
+		<td>Fired when the ImageOverlay layer fails to load its image</td>
+	</tr>
+</tbody></table>
+
+</section></div>
+	</div>
+</div>
+
+<div class='accordion'>
+	<label><span class='expander'>▶</span> Mouse events inherited from <a href='#interactive-layer'>Interactive layer</a></label>
+	<div class='accordion-overflow'>
+		<div class='accordion-content'><section >
+
+
+
+
+<table><thead>
+	<tr>
+		<th>Event</th>
+		<th>Data</th>
+		<th>Description</th>
+	</tr>
+	</thead><tbody>
+	<tr id='svgoverlay-click'>
+		<td><code><b>click</b>
+		<td><code><a href='#mouseevent'>MouseEvent</a></code></td>
+		<td>Fired when the user clicks (or taps) the layer.</td>
+	</tr>
+	<tr id='svgoverlay-dblclick'>
+		<td><code><b>dblclick</b>
+		<td><code><a href='#mouseevent'>MouseEvent</a></code></td>
+		<td>Fired when the user double-clicks (or double-taps) the layer.</td>
+	</tr>
+	<tr id='svgoverlay-mousedown'>
+		<td><code><b>mousedown</b>
+		<td><code><a href='#mouseevent'>MouseEvent</a></code></td>
+		<td>Fired when the user pushes the mouse button on the layer.</td>
+	</tr>
+	<tr id='svgoverlay-mouseup'>
+		<td><code><b>mouseup</b>
+		<td><code><a href='#mouseevent'>MouseEvent</a></code></td>
+		<td>Fired when the user releases the mouse button pushed on the layer.</td>
+	</tr>
+	<tr id='svgoverlay-mouseover'>
+		<td><code><b>mouseover</b>
+		<td><code><a href='#mouseevent'>MouseEvent</a></code></td>
+		<td>Fired when the mouse enters the layer.</td>
+	</tr>
+	<tr id='svgoverlay-mouseout'>
+		<td><code><b>mouseout</b>
+		<td><code><a href='#mouseevent'>MouseEvent</a></code></td>
+		<td>Fired when the mouse leaves the layer.</td>
+	</tr>
+	<tr id='svgoverlay-contextmenu'>
+		<td><code><b>contextmenu</b>
+		<td><code><a href='#mouseevent'>MouseEvent</a></code></td>
+		<td>Fired when the user right-clicks on the layer, prevents
+default browser context menu from showing if there are listeners on
+this event. Also fired on mobile when the user holds a single touch
+for a second (also called long press).</td>
+	</tr>
+</tbody></table>
+
+</section></div>
+	</div>
+</div>
+
+<div class='accordion'>
+	<label><span class='expander'>▶</span> Events inherited from <a href='#layer'>Layer</a></label>
+	<div class='accordion-overflow'>
+		<div class='accordion-content'><section >
+
+
+
+
+<table><thead>
+	<tr>
+		<th>Event</th>
+		<th>Data</th>
+		<th>Description</th>
+	</tr>
+	</thead><tbody>
+	<tr id='svgoverlay-add'>
+		<td><code><b>add</b>
+		<td><code><a href='#event'>Event</a></code></td>
+		<td>Fired after the layer is added to a map</td>
+	</tr>
+	<tr id='svgoverlay-remove'>
+		<td><code><b>remove</b>
+		<td><code><a href='#event'>Event</a></code></td>
+		<td>Fired after the layer is removed from a map</td>
+	</tr>
+</tbody></table>
+
+</section></div>
+	</div>
+</div>
+
+<div class='accordion'>
+	<label><span class='expander'>▶</span> Popup events inherited from <a href='#layer'>Layer</a></label>
+	<div class='accordion-overflow'>
+		<div class='accordion-content'><section >
+
+
+
+
+<table><thead>
+	<tr>
+		<th>Event</th>
+		<th>Data</th>
+		<th>Description</th>
+	</tr>
+	</thead><tbody>
+	<tr id='svgoverlay-popupopen'>
+		<td><code><b>popupopen</b>
+		<td><code><a href='#popupevent'>PopupEvent</a></code></td>
+		<td>Fired when a popup bound to this layer is opened</td>
+	</tr>
+	<tr id='svgoverlay-popupclose'>
+		<td><code><b>popupclose</b>
+		<td><code><a href='#popupevent'>PopupEvent</a></code></td>
+		<td>Fired when a popup bound to this layer is closed</td>
+	</tr>
+</tbody></table>
+
+</section></div>
+	</div>
+</div>
+
+<div class='accordion'>
+	<label><span class='expander'>▶</span> Tooltip events inherited from <a href='#layer'>Layer</a></label>
+	<div class='accordion-overflow'>
+		<div class='accordion-content'><section >
+
+
+
+
+<table><thead>
+	<tr>
+		<th>Event</th>
+		<th>Data</th>
+		<th>Description</th>
+	</tr>
+	</thead><tbody>
+	<tr id='svgoverlay-tooltipopen'>
+		<td><code><b>tooltipopen</b>
+		<td><code><a href='#tooltipevent'>TooltipEvent</a></code></td>
+		<td>Fired when a tooltip bound to this layer is opened.</td>
+	</tr>
+	<tr id='svgoverlay-tooltipclose'>
+		<td><code><b>tooltipclose</b>
+		<td><code><a href='#tooltipevent'>TooltipEvent</a></code></td>
+		<td>Fired when a tooltip bound to this layer is closed.</td>
+	</tr>
+</tbody></table>
+
+</section></div>
+	</div>
+</div>
+
+</section><section>
+<h3 id='svgoverlay-method'>Methods</h3>
+
+<section >
+
+
+
+
+<table><thead>
+	<tr>
+		<th>Method</th>
+		<th>Returns</th>
+		<th>Description</th>
+	</tr>
+	</thead><tbody>
+	<tr id='svgoverlay-getelement'>
+		<td><code><b>getElement</b>()</nobr></code></td>
+		<td><code>SVGElement</code></td>
+		<td><p>Returns the instance of <a href="https://developer.mozilla.org/docs/Web/API/SVGElement"><code>SVGElement</code></a>
+used by this overlay.</p>
+</td>
+	</tr>
+</tbody></table>
+
+</section>
+
+
+<div class='accordion'>
+	<label><span class='expander'>▶</span> Methods inherited from <a href='#imageoverlay'>ImageOverlay</a></label>
+	<div class='accordion-overflow'>
+		<div class='accordion-content'><section >
+
+
+
+
+<table><thead>
+	<tr>
+		<th>Method</th>
+		<th>Returns</th>
+		<th>Description</th>
+	</tr>
+	</thead><tbody>
+	<tr id='svgoverlay-setopacity'>
+		<td><code><b>setOpacity</b>(<nobr>&lt;Number&gt;</nobr> <i>opacity</i>)</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Sets the opacity of the overlay.</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-bringtofront'>
+		<td><code><b>bringToFront</b>()</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Brings the layer to the top of all overlays.</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-bringtoback'>
+		<td><code><b>bringToBack</b>()</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Brings the layer to the bottom of all overlays.</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-seturl'>
+		<td><code><b>setUrl</b>(<nobr>&lt;String&gt;</nobr> <i>url</i>)</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Changes the URL of the image.</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-setbounds'>
+		<td><code><b>setBounds</b>(<nobr>&lt;<a href='#latlngbounds'>LatLngBounds</a>&gt;</nobr> <i>bounds</i>)</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Update the bounds that this ImageOverlay covers</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-setzindex'>
+		<td><code><b>setZIndex</b>(<nobr>&lt;Number&gt;</nobr> <i>value</i>)</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Changes the <a href="#imageoverlay-zindex">zIndex</a> of the image overlay.</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-getbounds'>
+		<td><code><b>getBounds</b>()</nobr></code></td>
+		<td><code><a href='#latlngbounds'>LatLngBounds</a></code></td>
+		<td><p>Get the bounds that this ImageOverlay covers</p>
+</td>
+	</tr>
+</tbody></table>
+
+</section></div>
+	</div>
+</div>
+
+<div class='accordion'>
+	<label><span class='expander'>▶</span> Methods inherited from <a href='#layer'>Layer</a></label>
+	<div class='accordion-overflow'>
+		<div class='accordion-content'><section >
+
+
+
+
+<table><thead>
+	<tr>
+		<th>Method</th>
+		<th>Returns</th>
+		<th>Description</th>
+	</tr>
+	</thead><tbody>
+	<tr id='svgoverlay-addto'>
+		<td><code><b>addTo</b>(<nobr>&lt;Map|LayerGroup&gt;</nobr> <i>map</i>)</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Adds the layer to the given map or layer group.</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-remove'>
+		<td><code><b>remove</b>()</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Removes the layer from the map it is currently active on.</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-removefrom'>
+		<td><code><b>removeFrom</b>(<nobr>&lt;<a href='#map'>Map</a>&gt;</nobr> <i>map</i>)</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Removes the layer from the given map</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-getpane'>
+		<td><code><b>getPane</b>(<nobr>&lt;String&gt;</nobr> <i>name?</i>)</nobr></code></td>
+		<td><code>HTMLElement</code></td>
+		<td><p>Returns the <code>HTMLElement</code> representing the named pane on the map. If <code>name</code> is omitted, returns the pane for this layer.</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-getattribution'>
+		<td><code><b>getAttribution</b>()</nobr></code></td>
+		<td><code>String</code></td>
+		<td><p>Used by the <code>attribution control</code>, returns the <a href="#gridlayer-attribution">attribution option</a>.</p>
+</td>
+	</tr>
+</tbody></table>
+
+</section></div>
+	</div>
+</div>
+
+<div class='accordion'>
+	<label><span class='expander'>▶</span> Popup methods inherited from <a href='#layer'>Layer</a></label>
+	<div class='accordion-overflow'>
+		<div class='accordion-content'><section >
+
+
+
+
+<table><thead>
+	<tr>
+		<th>Method</th>
+		<th>Returns</th>
+		<th>Description</th>
+	</tr>
+	</thead><tbody>
+	<tr id='svgoverlay-bindpopup'>
+		<td><code><b>bindPopup</b>(<nobr>&lt;String|HTMLElement|Function|Popup&gt;</nobr> <i>content</i>, <nobr>&lt;<a href='#popup-option'>Popup options</a>&gt;</nobr> <i>options?</i>)</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Binds a popup to the layer with the passed <code>content</code> and sets up the
+necessary event listeners. If a <code>Function</code> is passed it will receive
+the layer as the first argument and should return a <code>String</code> or <code>HTMLElement</code>.</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-unbindpopup'>
+		<td><code><b>unbindPopup</b>()</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Removes the popup previously bound with <code>bindPopup</code>.</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-openpopup'>
+		<td><code><b>openPopup</b>(<nobr>&lt;<a href='#latlng'>LatLng</a>&gt;</nobr> <i>latlng?</i>)</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Opens the bound popup at the specified <a href="#latlng"><code>latlng</code></a> or at the default popup anchor if no <code>latlng</code> is passed.</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-closepopup'>
+		<td><code><b>closePopup</b>()</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Closes the popup bound to this layer if it is open.</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-togglepopup'>
+		<td><code><b>togglePopup</b>()</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Opens or closes the popup bound to this layer depending on its current state.</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-ispopupopen'>
+		<td><code><b>isPopupOpen</b>()</nobr></code></td>
+		<td><code>boolean</code></td>
+		<td><p>Returns <code>true</code> if the popup bound to this layer is currently open.</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-setpopupcontent'>
+		<td><code><b>setPopupContent</b>(<nobr>&lt;String|HTMLElement|Popup&gt;</nobr> <i>content</i>)</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Sets the content of the popup bound to this layer.</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-getpopup'>
+		<td><code><b>getPopup</b>()</nobr></code></td>
+		<td><code><a href='#popup'>Popup</a></code></td>
+		<td><p>Returns the popup bound to this layer.</p>
+</td>
+	</tr>
+</tbody></table>
+
+</section></div>
+	</div>
+</div>
+
+<div class='accordion'>
+	<label><span class='expander'>▶</span> Tooltip methods inherited from <a href='#layer'>Layer</a></label>
+	<div class='accordion-overflow'>
+		<div class='accordion-content'><section >
+
+
+
+
+<table><thead>
+	<tr>
+		<th>Method</th>
+		<th>Returns</th>
+		<th>Description</th>
+	</tr>
+	</thead><tbody>
+	<tr id='svgoverlay-bindtooltip'>
+		<td><code><b>bindTooltip</b>(<nobr>&lt;String|HTMLElement|Function|Tooltip&gt;</nobr> <i>content</i>, <nobr>&lt;<a href='#tooltip-option'>Tooltip options</a>&gt;</nobr> <i>options?</i>)</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Binds a tooltip to the layer with the passed <code>content</code> and sets up the
+necessary event listeners. If a <code>Function</code> is passed it will receive
+the layer as the first argument and should return a <code>String</code> or <code>HTMLElement</code>.</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-unbindtooltip'>
+		<td><code><b>unbindTooltip</b>()</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Removes the tooltip previously bound with <code>bindTooltip</code>.</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-opentooltip'>
+		<td><code><b>openTooltip</b>(<nobr>&lt;<a href='#latlng'>LatLng</a>&gt;</nobr> <i>latlng?</i>)</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Opens the bound tooltip at the specified <a href="#latlng"><code>latlng</code></a> or at the default tooltip anchor if no <code>latlng</code> is passed.</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-closetooltip'>
+		<td><code><b>closeTooltip</b>()</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Closes the tooltip bound to this layer if it is open.</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-toggletooltip'>
+		<td><code><b>toggleTooltip</b>()</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Opens or closes the tooltip bound to this layer depending on its current state.</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-istooltipopen'>
+		<td><code><b>isTooltipOpen</b>()</nobr></code></td>
+		<td><code>boolean</code></td>
+		<td><p>Returns <code>true</code> if the tooltip bound to this layer is currently open.</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-settooltipcontent'>
+		<td><code><b>setTooltipContent</b>(<nobr>&lt;String|HTMLElement|Tooltip&gt;</nobr> <i>content</i>)</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Sets the content of the tooltip bound to this layer.</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-gettooltip'>
+		<td><code><b>getTooltip</b>()</nobr></code></td>
+		<td><code><a href='#tooltip'>Tooltip</a></code></td>
+		<td><p>Returns the tooltip bound to this layer.</p>
+</td>
+	</tr>
+</tbody></table>
+
+</section></div>
+	</div>
+</div>
+
+<div class='accordion'>
+	<label><span class='expander'>▶</span> Methods inherited from <a href='#evented'>Evented</a></label>
+	<div class='accordion-overflow'>
+		<div class='accordion-content'><section >
+
+
+
+
+<table><thead>
+	<tr>
+		<th>Method</th>
+		<th>Returns</th>
+		<th>Description</th>
+	</tr>
+	</thead><tbody>
+	<tr id='svgoverlay-on'>
+		<td><code><b>on</b>(<nobr>&lt;String&gt;</nobr> <i>type</i>, <nobr>&lt;Function&gt;</nobr> <i>fn</i>, <nobr>&lt;Object&gt;</nobr> <i>context?</i>)</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Adds a listener function (<code>fn</code>) to a particular event type of the object. You can optionally specify the context of the listener (object the this keyword will point to). You can also pass several space-separated types (e.g. <code>&#39;click dblclick&#39;</code>).</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-on'>
+		<td><code><b>on</b>(<nobr>&lt;Object&gt;</nobr> <i>eventMap</i>)</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Adds a set of type/listener pairs, e.g. <code>{click: onClick, mousemove: onMouseMove}</code></p>
+</td>
+	</tr>
+	<tr id='svgoverlay-off'>
+		<td><code><b>off</b>(<nobr>&lt;String&gt;</nobr> <i>type</i>, <nobr>&lt;Function&gt;</nobr> <i>fn?</i>, <nobr>&lt;Object&gt;</nobr> <i>context?</i>)</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Removes a previously added listener function. If no function is specified, it will remove all the listeners of that particular event from the object. Note that if you passed a custom context to <code>on</code>, you must pass the same context to <code>off</code> in order to remove the listener.</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-off'>
+		<td><code><b>off</b>(<nobr>&lt;Object&gt;</nobr> <i>eventMap</i>)</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Removes a set of type/listener pairs.</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-off'>
+		<td><code><b>off</b>()</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Removes all listeners to all events on the object. This includes implicitly attached events.</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-fire'>
+		<td><code><b>fire</b>(<nobr>&lt;String&gt;</nobr> <i>type</i>, <nobr>&lt;Object&gt;</nobr> <i>data?</i>, <nobr>&lt;Boolean&gt;</nobr> <i>propagate?</i>)</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Fires an event of the specified type. You can optionally provide an data
+object — the first argument of the listener function will contain its
+properties. The event can optionally be propagated to event parents.</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-listens'>
+		<td><code><b>listens</b>(<nobr>&lt;String&gt;</nobr> <i>type</i>)</nobr></code></td>
+		<td><code>Boolean</code></td>
+		<td><p>Returns <code>true</code> if a particular event type has any listeners attached to it.</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-once'>
+		<td><code><b>once</b>(<i>…</i>)</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Behaves as <a href="#evented-on"><code>on(…)</code></a>, except the listener will only get fired once and then removed.</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-addeventparent'>
+		<td><code><b>addEventParent</b>(<nobr>&lt;<a href='#evented'>Evented</a>&gt;</nobr> <i>obj</i>)</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Adds an event parent - an <a href="#evented"><code>Evented</code></a> that will receive propagated events</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-removeeventparent'>
+		<td><code><b>removeEventParent</b>(<nobr>&lt;<a href='#evented'>Evented</a>&gt;</nobr> <i>obj</i>)</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Removes an event parent, so it will stop receiving propagated events</p>
+</td>
+	</tr>
+	<tr id='svgoverlay-addeventlistener'>
+		<td><code><b>addEventListener</b>(<i>…</i>)</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Alias to <a href="#evented-on"><code>on(…)</code></a></p>
+</td>
+	</tr>
+	<tr id='svgoverlay-removeeventlistener'>
+		<td><code><b>removeEventListener</b>(<i>…</i>)</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Alias to <a href="#evented-off"><code>off(…)</code></a></p>
+</td>
+	</tr>
+	<tr id='svgoverlay-clearalleventlisteners'>
+		<td><code><b>clearAllEventListeners</b>(<i>…</i>)</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Alias to <a href="#evented-off"><code>off()</code></a></p>
+</td>
+	</tr>
+	<tr id='svgoverlay-addonetimeeventlistener'>
+		<td><code><b>addOneTimeEventListener</b>(<i>…</i>)</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Alias to <a href="#evented-once"><code>once(…)</code></a></p>
+</td>
+	</tr>
+	<tr id='svgoverlay-fireevent'>
+		<td><code><b>fireEvent</b>(<i>…</i>)</nobr></code></td>
+		<td><code>this</code></td>
+		<td><p>Alias to <a href="#evented-fire"><code>fire(…)</code></a></p>
+</td>
+	</tr>
+	<tr id='svgoverlay-haseventlisteners'>
 		<td><code><b>hasEventListeners</b>(<i>…</i>)</nobr></code></td>
 		<td><code>Boolean</code></td>
 		<td><p>Alias to <a href="#evented-listens"><code>listens(…)</code></a></p>
@@ -8177,7 +8981,7 @@ the layer as the first argument and should return a <code>String</code> or <code
 	<tr id='path-off'>
 		<td><code><b>off</b>()</nobr></code></td>
 		<td><code>this</code></td>
-		<td><p>Removes all listeners to all events on the object.</p>
+		<td><p>Removes all listeners to all events on the object. This includes implicitly attached events.</p>
 </td>
 	</tr>
 	<tr id='path-fire'>
@@ -8702,9 +9506,11 @@ for a second (also called long press).</td>
 	</tr>
 	</thead><tbody>
 	<tr id='polyline-togeojson'>
-		<td><code><b>toGeoJSON</b>(<nobr>&lt;Number&gt;</nobr> <i>precision</i>)</nobr></code></td>
+		<td><code><b>toGeoJSON</b>(<nobr>&lt;Number&gt;</nobr> <i>precision?</i>)</nobr></code></td>
 		<td><code>Object</code></td>
-		<td><p>Returns a <a href="http://en.wikipedia.org/wiki/GeoJSON"><a href="#geojson"><code>GeoJSON</code></a></a> representation of the polyline (as a GeoJSON <code>LineString</code> or <code>MultiLineString</code> Feature).</p>
+		<td><p><code>precision</code> is the number of decimal places for coordinates.
+The default value is 6 places.
+Returns a <a href="http://en.wikipedia.org/wiki/GeoJSON"><a href="#geojson"><code>GeoJSON</code></a></a> representation of the polyline (as a GeoJSON <code>LineString</code> or <code>MultiLineString</code> Feature).</p>
 </td>
 	</tr>
 	<tr id='polyline-getlatlngs'>
@@ -9036,7 +9842,7 @@ the layer as the first argument and should return a <code>String</code> or <code
 	<tr id='polyline-off'>
 		<td><code><b>off</b>()</nobr></code></td>
 		<td><code>this</code></td>
-		<td><p>Removes all listeners to all events on the object.</p>
+		<td><p>Removes all listeners to all events on the object. This includes implicitly attached events.</p>
 </td>
 	</tr>
 	<tr id='polyline-fire'>
@@ -9568,9 +10374,11 @@ for a second (also called long press).</td>
 	</tr>
 	</thead><tbody>
 	<tr id='polygon-togeojson'>
-		<td><code><b>toGeoJSON</b>(<nobr>&lt;Number&gt;</nobr> <i>precision</i>)</nobr></code></td>
+		<td><code><b>toGeoJSON</b>(<nobr>&lt;Number&gt;</nobr> <i>precision?</i>)</nobr></code></td>
 		<td><code>Object</code></td>
-		<td><p>Returns a <a href="http://en.wikipedia.org/wiki/GeoJSON"><a href="#geojson"><code>GeoJSON</code></a></a> representation of the polygon (as a GeoJSON <a href="#polygon"><code>Polygon</code></a> or <code>MultiPolygon</code> Feature).</p>
+		<td><p><code>precision</code> is the number of decimal places for coordinates.
+The default value is 6 places.
+Returns a <a href="http://en.wikipedia.org/wiki/GeoJSON"><a href="#geojson"><code>GeoJSON</code></a></a> representation of the polygon (as a GeoJSON <a href="#polygon"><code>Polygon</code></a> or <code>MultiPolygon</code> Feature).</p>
 </td>
 	</tr>
 </tbody></table>
@@ -9923,7 +10731,7 @@ the layer as the first argument and should return a <code>String</code> or <code
 	<tr id='polygon-off'>
 		<td><code><b>off</b>()</nobr></code></td>
 		<td><code>this</code></td>
-		<td><p>Removes all listeners to all events on the object.</p>
+		<td><p>Removes all listeners to all events on the object. This includes implicitly attached events.</p>
 </td>
 	</tr>
 	<tr id='polygon-fire'>
@@ -10464,9 +11272,11 @@ for a second (also called long press).</td>
 	</tr>
 	</thead><tbody>
 	<tr id='rectangle-togeojson'>
-		<td><code><b>toGeoJSON</b>(<nobr>&lt;Number&gt;</nobr> <i>precision</i>)</nobr></code></td>
+		<td><code><b>toGeoJSON</b>(<nobr>&lt;Number&gt;</nobr> <i>precision?</i>)</nobr></code></td>
 		<td><code>Object</code></td>
-		<td><p>Returns a <a href="http://en.wikipedia.org/wiki/GeoJSON"><a href="#geojson"><code>GeoJSON</code></a></a> representation of the polygon (as a GeoJSON <a href="#polygon"><code>Polygon</code></a> or <code>MultiPolygon</code> Feature).</p>
+		<td><p><code>precision</code> is the number of decimal places for coordinates.
+The default value is 6 places.
+Returns a <a href="http://en.wikipedia.org/wiki/GeoJSON"><a href="#geojson"><code>GeoJSON</code></a></a> representation of the polygon (as a GeoJSON <a href="#polygon"><code>Polygon</code></a> or <code>MultiPolygon</code> Feature).</p>
 </td>
 	</tr>
 </tbody></table>
@@ -10820,7 +11630,7 @@ the layer as the first argument and should return a <code>String</code> or <code
 	<tr id='rectangle-off'>
 		<td><code><b>off</b>()</nobr></code></td>
 		<td><code>this</code></td>
-		<td><p>Removes all listeners to all events on the object.</p>
+		<td><p>Removes all listeners to all events on the object. This includes implicitly attached events.</p>
 </td>
 	</tr>
 	<tr id='rectangle-fire'>
@@ -11361,9 +12171,11 @@ for a second (also called long press).</td>
 	</tr>
 	</thead><tbody>
 	<tr id='circle-togeojson'>
-		<td><code><b>toGeoJSON</b>(<nobr>&lt;Number&gt;</nobr> <i>precision</i>)</nobr></code></td>
+		<td><code><b>toGeoJSON</b>(<nobr>&lt;Number&gt;</nobr> <i>precision?</i>)</nobr></code></td>
 		<td><code>Object</code></td>
-		<td><p>Returns a <a href="http://en.wikipedia.org/wiki/GeoJSON"><a href="#geojson"><code>GeoJSON</code></a></a> representation of the circle marker (as a GeoJSON <a href="#point"><code>Point</code></a> Feature).</p>
+		<td><p><code>precision</code> is the number of decimal places for coordinates.
+The default value is 6 places.
+Returns a <a href="http://en.wikipedia.org/wiki/GeoJSON"><a href="#geojson"><code>GeoJSON</code></a></a> representation of the circle marker (as a GeoJSON <a href="#point"><code>Point</code></a> Feature).</p>
 </td>
 	</tr>
 	<tr id='circle-setlatlng'>
@@ -11664,7 +12476,7 @@ the layer as the first argument and should return a <code>String</code> or <code
 	<tr id='circle-off'>
 		<td><code><b>off</b>()</nobr></code></td>
 		<td><code>this</code></td>
-		<td><p>Removes all listeners to all events on the object.</p>
+		<td><p>Removes all listeners to all events on the object. This includes implicitly attached events.</p>
 </td>
 	</tr>
 	<tr id='circle-fire'>
@@ -12143,9 +12955,11 @@ for a second (also called long press).</td>
 	</tr>
 	</thead><tbody>
 	<tr id='circlemarker-togeojson'>
-		<td><code><b>toGeoJSON</b>(<nobr>&lt;Number&gt;</nobr> <i>precision</i>)</nobr></code></td>
+		<td><code><b>toGeoJSON</b>(<nobr>&lt;Number&gt;</nobr> <i>precision?</i>)</nobr></code></td>
 		<td><code>Object</code></td>
-		<td><p>Returns a <a href="http://en.wikipedia.org/wiki/GeoJSON"><a href="#geojson"><code>GeoJSON</code></a></a> representation of the circle marker (as a GeoJSON <a href="#point"><code>Point</code></a> Feature).</p>
+		<td><p><code>precision</code> is the number of decimal places for coordinates.
+The default value is 6 places.
+Returns a <a href="http://en.wikipedia.org/wiki/GeoJSON"><a href="#geojson"><code>GeoJSON</code></a></a> representation of the circle marker (as a GeoJSON <a href="#point"><code>Point</code></a> Feature).</p>
 </td>
 	</tr>
 	<tr id='circlemarker-setlatlng'>
@@ -12457,7 +13271,7 @@ the layer as the first argument and should return a <code>String</code> or <code
 	<tr id='circlemarker-off'>
 		<td><code><b>off</b>()</nobr></code></td>
 		<td><code>this</code></td>
-		<td><p>Removes all listeners to all events on the object.</p>
+		<td><p>Removes all listeners to all events on the object. This includes implicitly attached events.</p>
 </td>
 	</tr>
 	<tr id='circlemarker-fire'>
@@ -12534,16 +13348,16 @@ properties. The event can optionally be propagated to event parents.</p>
 	</div>
 </div>
 
-</section><h2 id='svg'>SVG</h2><p>Allows vector layers to be displayed with <a href="https://developer.mozilla.org/docs/Web/SVG">SVG</a>.
+</section><h2 id='svg'>SVG</h2><p>VML was deprecated in 2012, which means VML functionality exists only for backwards compatibility
+with old versions of Internet Explorer.</p>
+<p>Allows vector layers to be displayed with <a href="https://developer.mozilla.org/docs/Web/SVG">SVG</a>.
 Inherits <a href="#renderer"><code>Renderer</code></a>.
 Due to <a href="http://caniuse.com/#search=svg">technical limitations</a>, SVG is not
 available in all web browsers, notably Android 2.x and 3.x.
 Although SVG is not available on IE7 and IE8, these browsers support
 <a href="https://en.wikipedia.org/wiki/Vector_Markup_Language">VML</a>
 (a now deprecated technology), and the SVG renderer will fall back to VML in
-this case.
-VML was deprecated in 2012, which means VML functionality exists only for backwards compatibility
-with old versions of Internet Explorer.</p>
+this case.</p>
 
 <section>
 <h3 id='svg-example'>Usage example</h3>
@@ -13036,7 +13850,7 @@ the layer as the first argument and should return a <code>String</code> or <code
 	<tr id='svg-off'>
 		<td><code><b>off</b>()</nobr></code></td>
 		<td><code>this</code></td>
-		<td><p>Removes all listeners to all events on the object.</p>
+		<td><p>Removes all listeners to all events on the object. This includes implicitly attached events.</p>
 </td>
 	</tr>
 	<tr id='svg-fire'>
@@ -13644,7 +14458,7 @@ the layer as the first argument and should return a <code>String</code> or <code
 	<tr id='canvas-off'>
 		<td><code><b>off</b>()</nobr></code></td>
 		<td><code>this</code></td>
-		<td><p>Removes all listeners to all events on the object.</p>
+		<td><p>Removes all listeners to all events on the object. This includes implicitly attached events.</p>
 </td>
 	</tr>
 	<tr id='canvas-fire'>
@@ -13922,9 +14736,11 @@ well. Extends <a href="#layer"><code>Layer</code></a>.</p>
 	</tr>
 	</thead><tbody>
 	<tr id='layergroup-togeojson'>
-		<td><code><b>toGeoJSON</b>(<nobr>&lt;Number&gt;</nobr> <i>precision</i>)</nobr></code></td>
+		<td><code><b>toGeoJSON</b>(<nobr>&lt;Number&gt;</nobr> <i>precision?</i>)</nobr></code></td>
 		<td><code>Object</code></td>
-		<td><p>Returns a <a href="http://en.wikipedia.org/wiki/GeoJSON"><a href="#geojson"><code>GeoJSON</code></a></a> representation of the layer group (as a GeoJSON <code>FeatureCollection</code>, <code>GeometryCollection</code>, or <code>MultiPoint</code>).</p>
+		<td><p><code>precision</code> is the number of decimal places for coordinates.
+The default value is 6 places.
+Returns a <a href="http://en.wikipedia.org/wiki/GeoJSON"><a href="#geojson"><code>GeoJSON</code></a></a> representation of the layer group (as a GeoJSON <code>FeatureCollection</code>, <code>GeometryCollection</code>, or <code>MultiPoint</code>).</p>
 </td>
 	</tr>
 	<tr id='layergroup-addlayer'>
@@ -14245,7 +15061,7 @@ the layer as the first argument and should return a <code>String</code> or <code
 	<tr id='layergroup-off'>
 		<td><code><b>off</b>()</nobr></code></td>
 		<td><code>this</code></td>
-		<td><p>Removes all listeners to all events on the object.</p>
+		<td><p>Removes all listeners to all events on the object. This includes implicitly attached events.</p>
 </td>
 	</tr>
 	<tr id='layergroup-fire'>
@@ -14597,9 +15413,11 @@ and custom events.</li>
 	</tr>
 	</thead><tbody>
 	<tr id='featuregroup-togeojson'>
-		<td><code><b>toGeoJSON</b>(<nobr>&lt;Number&gt;</nobr> <i>precision</i>)</nobr></code></td>
+		<td><code><b>toGeoJSON</b>(<nobr>&lt;Number&gt;</nobr> <i>precision?</i>)</nobr></code></td>
 		<td><code>Object</code></td>
-		<td><p>Returns a <a href="http://en.wikipedia.org/wiki/GeoJSON"><a href="#geojson"><code>GeoJSON</code></a></a> representation of the layer group (as a GeoJSON <code>FeatureCollection</code>, <code>GeometryCollection</code>, or <code>MultiPoint</code>).</p>
+		<td><p><code>precision</code> is the number of decimal places for coordinates.
+The default value is 6 places.
+Returns a <a href="http://en.wikipedia.org/wiki/GeoJSON"><a href="#geojson"><code>GeoJSON</code></a></a> representation of the layer group (as a GeoJSON <code>FeatureCollection</code>, <code>GeometryCollection</code>, or <code>MultiPoint</code>).</p>
 </td>
 	</tr>
 	<tr id='featuregroup-addlayer'>
@@ -14921,7 +15739,7 @@ the layer as the first argument and should return a <code>String</code> or <code
 	<tr id='featuregroup-off'>
 		<td><code><b>off</b>()</nobr></code></td>
 		<td><code>this</code></td>
-		<td><p>Removes all listeners to all events on the object.</p>
+		<td><p>Removes all listeners to all events on the object. This includes implicitly attached events.</p>
 </td>
 	</tr>
 	<tr id='featuregroup-fire'>
@@ -15381,9 +16199,11 @@ The default is the <code>coordsToLatLng</code> static method.</td>
 	</tr>
 	</thead><tbody>
 	<tr id='geojson-togeojson'>
-		<td><code><b>toGeoJSON</b>(<nobr>&lt;Number&gt;</nobr> <i>precision</i>)</nobr></code></td>
+		<td><code><b>toGeoJSON</b>(<nobr>&lt;Number&gt;</nobr> <i>precision?</i>)</nobr></code></td>
 		<td><code>Object</code></td>
-		<td><p>Returns a <a href="http://en.wikipedia.org/wiki/GeoJSON"><a href="#geojson"><code>GeoJSON</code></a></a> representation of the layer group (as a GeoJSON <code>FeatureCollection</code>, <code>GeometryCollection</code>, or <code>MultiPoint</code>).</p>
+		<td><p><code>precision</code> is the number of decimal places for coordinates.
+The default value is 6 places.
+Returns a <a href="http://en.wikipedia.org/wiki/GeoJSON"><a href="#geojson"><code>GeoJSON</code></a></a> representation of the layer group (as a GeoJSON <code>FeatureCollection</code>, <code>GeometryCollection</code>, or <code>MultiPoint</code>).</p>
 </td>
 	</tr>
 	<tr id='geojson-addlayer'>
@@ -15705,7 +16525,7 @@ the layer as the first argument and should return a <code>String</code> or <code
 	<tr id='geojson-off'>
 		<td><code><b>off</b>()</nobr></code></td>
 		<td><code>this</code></td>
-		<td><p>Removes all listeners to all events on the object.</p>
+		<td><p>Removes all listeners to all events on the object. This includes implicitly attached events.</p>
 </td>
 	</tr>
 	<tr id='geojson-fire'>
@@ -16543,7 +17363,7 @@ the layer as the first argument and should return a <code>String</code> or <code
 	<tr id='gridlayer-off'>
 		<td><code><b>off</b>()</nobr></code></td>
 		<td><code>this</code></td>
-		<td><p>Removes all listeners to all events on the object.</p>
+		<td><p>Removes all listeners to all events on the object. This includes implicitly attached events.</p>
 </td>
 	</tr>
 	<tr id='gridlayer-fire'>
@@ -17607,9 +18427,10 @@ L.marker([50.505, 30.57], {icon: myIcon}).addTo(map);
 	</thead><tbody>
 	<tr id='divicon-html'>
 		<td><code><b>html</b></code></td>
-		<td><code>String</code>
+		<td><code>String|HTMLElement</code>
 		<td><code>&#x27;&#x27;</code></td>
-		<td>Custom HTML code to put inside the div element, empty by default.</td>
+		<td>Custom HTML code to put inside the div element, empty by default. Alternatively,
+an instance of <code>HTMLElement</code>.</td>
 	</tr>
 	<tr id='divicon-bgpos'>
 		<td><code><b>bgPos</b></code></td>
@@ -19481,7 +20302,7 @@ argument of the <a href="http://cubic-bezier.com/#0,0,.5,1">cubic bezier curve</
 	<tr id='posanimation-off'>
 		<td><code><b>off</b>()</nobr></code></td>
 		<td><code>this</code></td>
-		<td><p>Removes all listeners to all events on the object.</p>
+		<td><p>Removes all listeners to all events on the object. This includes implicitly attached events.</p>
 </td>
 	</tr>
 	<tr id='posanimation-fire'>
@@ -19752,7 +20573,7 @@ update of the element&#39;s position.</td>
 	<tr id='draggable-off'>
 		<td><code><b>off</b>()</nobr></code></td>
 		<td><code>this</code></td>
-		<td><p>Removes all listeners to all events on the object.</p>
+		<td><p>Removes all listeners to all events on the object. This includes implicitly attached events.</p>
 </td>
 	</tr>
 	<tr id='draggable-fire'>
@@ -20121,7 +20942,7 @@ map.off(&#39;click&#39;, onClick);
 	<tr id='evented-off'>
 		<td><code><b>off</b>()</nobr></code></td>
 		<td><code>this</code></td>
-		<td><p>Removes all listeners to all events on the object.</p>
+		<td><p>Removes all listeners to all events on the object. This includes implicitly attached events.</p>
 </td>
 	</tr>
 	<tr id='evented-fire'>
@@ -20209,7 +21030,7 @@ Inherits all methods, options and events from <a href="#evented"><code>L.Evented
 
 
 
-<pre><code class="lang-js">var layer = L.Marker(latlng).addTo(map);
+<pre><code class="lang-js">var layer = L.marker(latlng).addTo(map);
 layer.addTo(map);
 layer.remove();
 </code></pre>
@@ -20607,7 +21428,7 @@ the layer as the first argument and should return a <code>String</code> or <code
 	<tr id='layer-off'>
 		<td><code><b>off</b>()</nobr></code></td>
 		<td><code>this</code></td>
-		<td><p>Removes all listeners to all events on the object.</p>
+		<td><p>Removes all listeners to all events on the object. This includes implicitly attached events.</p>
 </td>
 	</tr>
 	<tr id='layer-fire'>
@@ -21148,7 +21969,7 @@ the layer as the first argument and should return a <code>String</code> or <code
 	<tr id='interactive-layer-off'>
 		<td><code><b>off</b>()</nobr></code></td>
 		<td><code>this</code></td>
-		<td><p>Removes all listeners to all events on the object.</p>
+		<td><p>Removes all listeners to all events on the object. This includes implicitly attached events.</p>
 </td>
 	</tr>
 	<tr id='interactive-layer-fire'>
@@ -21515,7 +22336,7 @@ latitude. Also suitable for flat worlds, e.g. game maps. Used by the
 	</tr>
 	<tr id='projection-l-projection-mercator'>
 		<td><code><b>L.Projection.Mercator</b></code></td>
-		<td>Elliptical Mercator projection — more complex than Spherical Mercator. Takes into account that Earth is a geoid, not a perfect sphere. Used by the EPSG:3395 CRS.</td>
+		<td>Elliptical Mercator projection — more complex than Spherical Mercator. Assumes that Earth is an ellipsoid. Used by the EPSG:3395 CRS.</td>
 	</tr>
 	<tr id='projection-l-projection-sphericalmercator'>
 		<td><code><b>L.Projection.SphericalMercator</b></code></td>
@@ -21674,13 +22495,6 @@ geographical CRSs. If <code>undefined</code>, the longitude axis does not wrap a
 		<th>Description</th>
 	</tr>
 	</thead><tbody>
-	<tr id='crs-l-crs-earth'>
-		<td><code><b>L.CRS.Earth</b></code></td>
-		<td>Serves as the base for CRS that are global such that they cover the earth.
-Can only be used as the base for other CRS and cannot be used directly,
-since it does not have a <code>code</code>, <a href="#projection"><code>projection</code></a> or <a href="#transformation"><code>transformation</code></a>. <code>distance()</code> returns
-meters.</td>
-	</tr>
 	<tr id='crs-l-crs-epsg3395'>
 		<td><code><b>L.CRS.EPSG3395</b></code></td>
 		<td>Rarely used by some commercial tile providers. Uses Elliptical Mercator projection.</td>
@@ -21700,6 +22514,20 @@ with this CRS, ensure that there are two 256x256 pixel tiles covering the
 whole earth at zoom level zero, and that the tile coordinate origin is (-180,+90),
 or (-180,-90) for <code>TileLayer</code>s with <a href="#tilelayer-tms">the <code>tms</code> option</a> set.</td>
 	</tr>
+	<tr id='crs-l-crs-earth'>
+		<td><code><b>L.CRS.Earth</b></code></td>
+		<td>Serves as the base for CRS that are global such that they cover the earth.
+Can only be used as the base for other CRS and cannot be used directly,
+since it does not have a <code>code</code>, <a href="#projection"><code>projection</code></a> or <a href="#transformation"><code>transformation</code></a>. <code>distance()</code> returns
+meters.</td>
+	</tr>
+	<tr id='crs-l-crs-simple'>
+		<td><code><b>L.CRS.Simple</b></code></td>
+		<td>A simple CRS that maps longitude and latitude into <code>x</code> and <code>y</code> directly.
+May be used for maps of flat surfaces (e.g. game maps). Note that the <code>y</code>
+axis should still be inverted (going from bottom to top). <code>distance()</code> returns
+simple euclidean distance.</td>
+	</tr>
 	<tr id='crs-l-crs-base'>
 		<td><code><b>L.CRS.Base</b></code></td>
 		<td>Object that defines coordinate reference systems for projecting
@@ -21712,13 +22540,6 @@ CRS not defined by default, take a look at the
 Note that the CRS instances do not inherit from Leafet&#39;s <a href="#class"><code>Class</code></a> object,
 and can&#39;t be instantiated. Also, new classes can&#39;t inherit from them,
 and methods can&#39;t be added to them with the <code>include</code> function.</td>
-	</tr>
-	<tr id='crs-l-crs-simple'>
-		<td><code><b>L.CRS.Simple</b></code></td>
-		<td>A simple CRS that maps longitude and latitude into <code>x</code> and <code>y</code> directly.
-May be used for maps of flat surfaces (e.g. game maps). Note that the <code>y</code>
-axis should still be inverted (going from bottom to top). <code>distance()</code> returns
-simple euclidean distance.</td>
 	</tr>
 </tbody></table>
 
@@ -22161,7 +22982,7 @@ the layer as the first argument and should return a <code>String</code> or <code
 	<tr id='renderer-off'>
 		<td><code><b>off</b>()</nobr></code></td>
 		<td><code>this</code></td>
-		<td><p>Removes all listeners to all events on the object.</p>
+		<td><p>Removes all listeners to all events on the object. This includes implicitly attached events.</p>
 </td>
 	</tr>
 	<tr id='renderer-fire'>
@@ -23862,7 +24683,7 @@ the layer as the first argument and should return a <code>String</code> or <code
 	<tr id='divoverlay-off'>
 		<td><code><b>off</b>()</nobr></code></td>
 		<td><code>this</code></td>
-		<td><p>Removes all listeners to all events on the object.</p>
+		<td><p>Removes all listeners to all events on the object. This includes implicitly attached events.</p>
 </td>
 	</tr>
 	<tr id='divoverlay-fire'>

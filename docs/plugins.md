@@ -732,6 +732,15 @@ The following plugins change the way that tile layers are loaded into the map.
 			<a href="https://github.com/robertomlsoares">Roberto Soares</a>
 		</td>
 	</tr>
+	<tr>
+		<td>
+			<a href="https://github.com/allartk/leaflet.offline">leaflet.offline</a>
+		</td><td>
+			Allow tiles to be stored in an database for offline access. Original plugin.<a href="http://allartk.github.io/leaflet.offline/">Demo</a>.
+		</td><td>
+			<a href="https://github.com/allartk">Allart Kooiman</a>
+		</td>
+	</tr>
 </table>
 
 
@@ -772,7 +781,7 @@ Plugins to display [vector tiles](https://github.com/mapbox/vector-tile-spec).
 		<td>
 			<a href="https://github.com/IvanSanchez/Leaflet.VectorGrid">Leaflet.VectorGrid</a>
 		</td><td>
-			Display gridded vector data (GeoJSON or TopoJSON sliced with geojson-vt, or protobuf vector tiles) in Leaflet 1.0.0. See <a href="https://github.com/IvanSanchez/Leaflet.VectorGrid#demo">demos</a>. Not compatible with 0.7.x.
+			Display gridded vector data (GeoJSON or TopoJSON sliced with geojson-vt, or protobuf vector tiles) in Leaflet 1.0.0. See <a href="https://github.com/IvanSanchez/Leaflet.VectorGrid#demos">demos</a>. Not compatible with 0.7.x.
 		</td><td>
 			<a href="https://github.com/IvanSanchez">Iván Sánchez</a>
 		</td>
@@ -803,6 +812,15 @@ The following plugins provide new ways of loading overlay data (GIS vector data)
 Load your own data from various GIS formats.
 
 <table class="plugins"><tr><th>Plugin</th><th>Description</th><th>Maintainer</th></tr>
+	<tr>
+		<td>
+			<a href="https://github.com/windycom/leaflet-kml">leaflet-kml</a>
+		</td><td>
+			Loads &amp; displays KML
+		</td><td>
+			<a href="https://github.com/windycom">Windyx</a>
+		</td>
+	</tr>
     <tr>
 		<td>
 			<a href="https://github.com/mapbox/leaflet-omnivore">leaflet-omnivore</a>
@@ -1741,7 +1759,17 @@ These plugins provide new markers or news ways of converting abstract data into 
 			<a href="https://github.com/nuclearsecrecy/">Alex Wellerstein</a>
 		</td>
 	</tr>
-
+	<tr>
+		<td>
+			<a href="https://github.com/iDerekLi/Leaflet.CustomLayer">Leaflet.CustomLayer</a>
+		</td>
+		<td>
+			A Leaflet plugin L.CustomLayer - fully custom Layer.
+		</td>
+		<td>
+			<a href="https://github.com/iDerekLi/">Derek Li</a>
+		</td>
+	</tr>
 </table>
 
 
@@ -2671,7 +2699,7 @@ These plugins help users select either overlays or areas in the map.
 			<a href="https://github.com/zakjan/leaflet-lasso">leaflet-lasso</a>
 		</td>
 		<td>
-			True lasso selection plugin
+			True lasso selection plugin (<a href="http://zakjan.github.io/leaflet-lasso/">Demo</a>)
 		</td>
 		<td>
 			<a href="https://github.com/zakjan">Jan Zak</a>
@@ -3515,6 +3543,15 @@ These plugins extend Leaflet event handling.
 			<a href="https://github.com/idawave">Vincent Dechandon</a>
 		</td>
 	</tr>
+	<tr>
+		<td>
+			<a href="https://github.com/iboates/leaflet-spotlight">L.Spotlight</a>
+		</td><td>
+			Dynamically highlight features near the mouse cursor with a customizable shape
+		</td><td>
+			<a href="https://github.com/iboates">Isaac Boates</a>
+		</td>
+	</tr>
 </table>
 
 
@@ -4052,7 +4089,7 @@ The following plugins use external services to calculate driving or walking rout
     	</tr>
     <tr>
     	<td>
-    		<a href="https://github.com/skedgo/leaflet.tripgo.routing">Leaflet TripGo routing</a>
+    		<a href="https://github.com/skedgo/tripkit-leaflet">Leaflet TripGo routing</a>
     	</td>
     	<td>
     		The <b>TripGo</b> mobility platform lets you create apps providing seamless and personalised door-to-door trips using any public, private or commercial mode of transport.
@@ -4172,10 +4209,10 @@ External services that transform an address or the name of a place into latitude
 	</tr>
 	<tr>
 		<td>
-			<a href="https://github.com/mapzen/leaflet-geocoder">Mapzen Search Leaflet Geocoder</a>
+			<a href="https://github.com/pelias/leaflet-plugin">Pelias Leaflet Plugin</a>
 		</td>
 		<td>
-			A geocoding control using <a href="https://mapzen.com/projects/search">Mapzen Search</a> or any hosted service powered by the <a href="https://github.com/pelias/api">Pelias Geocoder API</a>.  <a href="https://mapzen.github.io/leaflet-geocoder/">Demo</a>
+			A geocoding control using <a href="https://geocode.earth">Geocode Earth</a> or any hosted service powered by the <a href="https://github.com/pelias/api">Pelias Geocoder API</a>.  <a href="https://pelias.github.io/leaflet-plugin/">Demo</a>
 		</td>
 		<td>
 			<a href="https://github.com/louh">Lou Huang</a>
@@ -4397,7 +4434,7 @@ Ease your development integrating Leaflet into a development framework or automa
 	</tr>
 	<tr>
 		<td>
-			<a href="http://www.ember-leaflet.com/">ember-leaflet</a>
+			<a href="https://miguelcobain.github.io/ember-leaflet/">ember-leaflet</a>
 		</td><td>
 			Easy and declarative mapping for <a href="http://emberjs.com/">Ember.js</a> using Leaflet.
 		</td><td>
@@ -4532,6 +4569,61 @@ The following plugins integrate Leaflet into third party services or websites.
 			<a href="https://github.com/Lapizistik">Klaus Stein</a>
 		</td>
 	</tr>
+	<tr>
+		<td>
+			<a href="http://wp-mapit.phpwebdev.in">WP MapIt</a>
+		</td><td>
+			Easy to use, WordPress Map plugin based on Open Street Map and Leaflet with custom markers images, descriptions and links.
+		</td><td>
+			<a href="http://phpwebdev.in/">Chandni Patel</a>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<a href="https://community.mybb.com/mods.php?action=view&pid=1238">ABP Usermap MyBB</a>
+		</td><td>
+		A plugin for <a href="https://mybb.com/">MyBB</a> creating a map of users based on Open Street Map and Leaflet, with customisable popup and markers
+		</td><td>
+			<a href="https://gitlab.com/AnoBug">CrazyCat</a>
+		</td>
+	</tr>
+  <tr>
+		<td>
+      Leaflet Extensions for <a href="https://www.joomla.org/">Joomla! (3.x)</a>
+		</td><td>
+			<ul>
+        <li>
+          <strong>Agosm: </strong><br />
+          Joomla Module not only for showing Markers on a OpenStreetMap Map.<br />
+          <a href="https://github.com/astridx/pkg_agosms">Gibhub</a><br />
+          <a href="https://extensions.joomla.org/extensions/extension/maps-a-weather/maps-a-locations/agosm/">Joomla Extension Directory</a><br />
+        </li>
+        <li>
+            <strong>Aggpxtrack: </strong><br />
+            Joomla Custom Field for dispaying a GPX Track on a Map - you can choose an OpenStreetMap or GoogleMaps. With much options. For example: One option is an elevation profil.<br />
+            <a href="https://github.com/astridx/pkg_aggpxtrack">Gibhub</a><br />
+            <a href="https://extensions.joomla.org/extensions/extension/maps-a-weather/maps-a-locations/aggpxtrack/">Joomla Extension Directory</a><br />
+        </li>
+        <li>
+            <strong>Agosmmapwithmarker: </strong><br />
+            Custom field for show a map with a marker in frond end - always the right card for the content. You can enter the address in backend.<br />
+            <a href="https://github.com/astridx/plg_fields_agosmmapwithmarker">Gibhub</a><br />
+            <a href="https://extensions.joomla.org/extensions/extension/maps-a-weather/maps-a-locations/agosmmapwithmarker/">Joomla Extension Directory</a><br />
+        </li>
+    </ul>
+		</td><td>
+			<a href="https://github.com/astridx">Astrid Günther</a>
+    </td>
+  </tr>
+  <tr>
+	<td>
+		<a href="https://github.com/mwasil/Leaflet.Facebook/">Leaflet.Facebook</a>
+	</td><td>
+		Simple plugin for adding Facebook like button as a control.			
+	  </td><td>
+		<a href="https://marcinwasilewski.eu/u">Marcin Wasilewski</a>
+	</td>
+  </tr>
 </table>
 
 
