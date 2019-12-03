@@ -1,6 +1,6 @@
 {
   "name": "@sitepark/leaflet",
-  "version": "1.6.0-FORK.1",
+  "version": "1.6.0+1",
   "homepage": "https://leafletjs.com/",
   "description": "JavaScript library for mobile-friendly interactive maps",
   "devDependencies": {
